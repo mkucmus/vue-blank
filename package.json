@@ -3,7 +3,7 @@
   "version": "0.0.3",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
+    "build": "NITRO_PRESET=azure nuxi build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview"
