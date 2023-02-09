@@ -1,17 +1,55 @@
 <script setup lang="ts">
-import Frontends from "./components/Frontends.vue";
-const { refreshSessionContext } = useSessionContext();
-
-onMounted(() => {
-  refreshSessionContext();
+import { reactive } from "vue";
+import {
+  useSessionContext,
+  useCheckout,
+  useUser,
+} from "@shopware-pwa/composables-next";
+defineProps<{
+  template: string;
+}>();
+const { currency , refreshSessionContext} = useSessionContext();
+const { selectedPaymentMethod } = useCheckout();
+const { isLoggedIn, login } = useUser();
+const credentials = reactive({
+  username: "",
+  password: "",
 });
+onMounted(() => refreshSessionContext());
+const invokeLogin = () => login(credentials); 
 </script>
 
 <template>
-  <div id="app">
-    <Frontends template="Blank Vue 3 template (Nuxt)" />
+  <div>
+    <img class="logo" src="/shopware-frontends-logo.png" />
+  </div>
+  <h1>{{ template }}</h1>
+  <div class="example">
+    <p>
+      Currency: <strong>{{ currency?.name }} ({{ currency?.symbol }})</strong>
+    </p>
+    <p>
+      Default payment method: <strong>{{ selectedPaymentMethod?.name }}</strong>
+    </p>
+    <p>
+      Is customer logged in: <strong>{{ isLoggedIn }}</strong>
+      <div>
+        <input type="text" v-model="credentials.username" />
+        <input type="password" v-model="credentials.password" />
+        <button @click="invokeLogin">Login</button>
+      </div>
+    </p>
   </div>
 </template>
-<style>
-@import "./style.css";
+<style scoped>
+.logo {
+  max-width: 100%;
+}
+.example {
+  width: 500px;
+  margin: 0 auto;
+  text-align: left;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
 </style>

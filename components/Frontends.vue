@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useUser, useSessionContext } from "@shopware-pwa/composables-next"
 defineProps<{
   template: string;
 }>();

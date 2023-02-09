@@ -1,10 +1,9 @@
+import { defineNuxtConfig } from "nuxt/config";
+import module from "./module";
+
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  shopware: {
-    shopwareEndpoint: process.env.API_URL,
-    shopwareAccessToken: process.env.API_ACCESS_TOKEN,
-  },
-  modules: ["@vueuse/nuxt", "@shopware-pwa/nuxt3-module"],
+  modules: ["@vueuse/nuxt", module],
   typescript: {
     typeCheck: true,
     strict: true,
