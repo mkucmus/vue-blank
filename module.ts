@@ -29,6 +29,8 @@ export default defineNuxtModule<ShopwareNuxtOptions>({
     configKey: "shopware",
   },
   setup(moduleConfig, nuxt) {
+    nuxt.options.build.transpile.push("@shopware-pwa/composables-next");
+
     addPluginTemplate({
       filename: "runtime/shopware.plugin.mjs",
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
